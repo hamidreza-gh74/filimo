@@ -1,0 +1,14 @@
+@keyframes accrdn {
+  from {
+    height: 53px;
+  }
+  to {
+    height: 300px;
+  }
+}
+.hamid {
+  height: 53px;
+  animation-name: accrdn;
+  animation-duration: 4s;
+  animation-iteration-count: 1;
+}
