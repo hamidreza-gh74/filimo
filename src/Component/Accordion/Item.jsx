@@ -1,36 +1,38 @@
 import plus from "../../../public/image/accordion/plus.svg";
 
-import "./style.css"
-const Item = ({ name }) => {
-  const show = (e) => {
-    let data = [...e.target.parentElement.classList];
-
-    if (data.includes("h-[53px]")) {
-      e.target.parentElement.classList.remove("h-[53px]");
-      e.target.children[1].classList.remove("rotate-45");
-      e.target.parentElement.classList.add("h-[auto]");
-      e.target.children[1].classList.add("rotate-0");
-    } else {
-      e.target.parentElement.classList.add("h-[53px]");
-      e.target.children[1].classList.add("rotate-45");
-      e.target.parentElement.classList.remove("h-[auto]");
-      e.target.children[1].classList.remove("rotate-0");
-    }
-  };
+const Item = ({ item, selected, sample, setSelect }) => {
+  const open = selected == sample;
   return (
-    <>
-      <div className="parent w-[100%] h-[53px] rounded-[12px] border-[1px] border-solid border-[#555555] bg-[#2d2d2d] overflow-hidden mb-[15px] ">
-        
-        <div className="titr w-[100%] h-[53px] p-[16px]  flex items-center justify-between cursor-pointer overflow-hidden "
-          onClick={show}
-        >
-          <div className="text text-[#dcdcdc]  text-[16px] font-[500]  ">{name} 
-          </div>
-          <div className="img w-[14px] h-[14px] mr-[30px] rotate-45 ">
-            <img src={plus} alt="" className="w-[14px] h-[14px] " />
-          </div>
+    <div className="w-[100%] flex flex-col justify-between items-center py-[12px] mb-[15px] rounded-[12px] border-[1px] border-solid border-[#555555] bg-[#2d2d2d] ">
+      <div
+        className="acc_main flex  w-[100%] justify-between items-center cursor-pointer px-[10px] py-[8px]"
+        onClick={() => {
+          setSelect(
+            selected == `carousel-${item.id}` ? "" : `carousel-${item.id}`
+          );
+        }}
+        id={item.id}
+      >
+        <div className="text text-[#dcdcdc]  text-[16px] font-[500]">
+          {item.text}
         </div>
-        <div className="answer text-[#dcdcdc] p-[16px]  text-[14px] font-[400] text-justify leading-[23px] overflow-hidden  ">
+        <div className="img wimg w-[14px] h-[14px]  ">
+          <img
+            src={plus}
+            alt=""
+            className={`w-[100%] h-[100%] object-contain ${
+              open ? null : "rotate-45"
+            } `}
+          />
+        </div>
+      </div>
+
+      <div
+        className={` ${
+          open ? "flex" : "hidden"
+        }  flex-wrap justify-center items-center  w-[100%] mt-[5px]`}
+      >
+        <div className="answer text-[#dcdcdc] p-[16px]  text-[14px] font-[400] text-justify leading-[2.17] overflow-hidden  ">
           بله، شما می‌توانید همه فیلم‌ و سریال‌های فیلیمو را داخل خود اپلیکیشن
           فیلیمو دانلود کنید و برای زمان‌هایی که اینترنت ندارید یا در سفر،
           هواپیما و قطار آ‌ن‌ها را تماشا کنید. برای دانلود هم از طریق رایانه و
@@ -39,7 +41,7 @@ const Item = ({ name }) => {
           طریق اپلیکیشن را تماشا کنید.
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

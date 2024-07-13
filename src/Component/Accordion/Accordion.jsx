@@ -1,12 +1,14 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import Item from "./Item";
 import { MyContext } from "../App";
 
 const Accordion = () => {
   let { accordion } = useContext(MyContext);
+  const [selected, setSelect] = useState("");
+
   return (
-    <div className="w-[100%] h-[568px] bg-[#292929] flex justify-center ">
-      <div className="w-[100%] h-[768px] py-[80px] max-w-[1400px] bg-[#292929] flex justify-center ">
+    <div className="w-[100%] h-[auto] bg-[#292929] flex justify-center ">
+      <div className="w-[100%] h-[auto] py-[80px] max-w-[1400px] bg-[#292929] flex justify-center ">
         <div className="w-[94%] h-[100%] px-[20px]  flex flex-col items-center">
           <h2 className="text-[16px] font-[400] text-[white] ">
             سوالات متداول
@@ -16,7 +18,15 @@ const Accordion = () => {
           </div>
           <div className="w-[80%] h-[auto]">
             {accordion?.map((item) => {
-              return <Item name={item.text} key={item.id} />;
+              return (
+                <Item
+                  item={item}
+                  selected={selected}
+                  setSelect={setSelect}
+                  sample={`carousel-${item.id}`}
+                  key={`carousel-${item.id}`}
+                />
+              );
             })}
           </div>
         </div>
